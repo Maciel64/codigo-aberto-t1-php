@@ -1,0 +1,36 @@
+{
+    "name": "macie/authphp",
+    "description": "Login com várias validações feito de forma correta.",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Maciel G S Júnior",
+            "email": "macielsuassuna14@gmail.com",
+            "role": "Backend developer"
+        }
+    ],
+
+    "autoload": {
+        "psr-4": {
+            "Source\\" : "source"
+        },
+
+        "files": [
+            "source/Config.php",
+            "source/Helpers.php"
+        ]
+    },
+
+    "require": {
+        "ext-json": "*",
+        "coffeecode/router": "1.0.7",
+        "coffeecode/datalayer": "1.1.4",
+        "coffeecode/optimizer": "2.0.0",
+        "phpmailer/phpmailer": "6.0.7",
+        "league/plates": "v4.0.0-alpha",
+        "league/oauth2-facebook": "2.0.1",
+        "league/oauth2-google": "3.0.1",
+        "matthiasmullie/minify": "1.3.61"
+    }
+}
