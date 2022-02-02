@@ -8,7 +8,7 @@
         "desc" => "Aprendendo a construir uma autenticação em PHP seguindo boas práticas",
         "domain" => "localauth.com",
         "locale" => "pt_BR",
-        "root" => "https://localhost:8000"
+        "root" => "http://localhost/robson-v-leite-codigo-aberto-1/"
     ]);
 
     /**

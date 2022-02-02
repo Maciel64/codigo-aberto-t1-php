@@ -20,12 +20,13 @@
      */
 
     function asset (string $path) : string {
-        return SITE["root"] . "/views/assets/{$path}";
+        return site() . "/views/assets{$path}";
     }
 
 
     /**
-     * 
+     * @param string $type Chave de descrição do erro
+     * @param string $message Mensagem para determinado erro
      */
 
     function flash (string $type = null, string $message = null) : ?string {
@@ -49,4 +50,9 @@
 
         
         return null;
+    }
+
+
+    function routeImage (string $imageUrl) : string {
+        return "https://via.placeholder.com/1200x628/0984e3/FFFFFF?text={$imageUrl}";
     }
