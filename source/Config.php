@@ -8,14 +8,14 @@
         "desc" => "Aprendendo a construir uma autenticação em PHP seguindo boas práticas",
         "domain" => "localauth.com",
         "locale" => "pt_BR",
-        "root" => "http://localhost/robson-v-leite-codigo-aberto-1/"
+        "root" => "https://localhost/robson-v-leite-codigo-aberto-1/"
     ]);
 
     /**
      * Minify do site
      */
 
-    if ($_SERVER["SERVER_NAME"] === "localhost") {
+    if ($_SERVER["SERVER_NAME"] === "www.localhost") {
         require __DIR__ . "/Minify.php";
     }
 
@@ -29,7 +29,7 @@
         "port" => "3306",
         "dbname" => "auth-codigo-aberto-t1",
         "username" => "root",
-        "passwd" => "Maciel64!",
+        "passwd" => "",
         "options" => [
             PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

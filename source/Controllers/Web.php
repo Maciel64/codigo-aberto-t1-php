@@ -13,9 +13,9 @@
         public function __construct($router) {
             parent::__construct($router);
 
-            if (!empty($_SESSION["user"])) {
-                $this->router->redirect("app.home");
-            }
+            // if (!empty($_SESSION["user"])) {
+            //     $this->router->redirect("app.home");
+            // }
         }
 
 
@@ -43,9 +43,9 @@
             )->render();
  
             $form_user = new \stdClass;
-            $form_user->first_name = null;
-            $form_user->last_name = null;
-            $form_user->email = null;
+            $form_user->first_name = "Maciel";
+            $form_user->last_name = "Suassuna";
+            $form_user->email = "maciel@gmail.com";
 
             echo $this->view->render("theme/register", [
                 "head" => $head,

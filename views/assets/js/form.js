@@ -6,8 +6,10 @@ $(function () {
         var action = form.attr("action");
         var data = form.serialize();
 
+        var action2 = action.slice(action.lastIndexOf("/") - action.length + 1)
+
         $.ajax({
-            url: action,
+            url: action2,
             data: data,
             type: "post",
             dataType: "json",
@@ -21,7 +23,6 @@ $(function () {
                     var view = '<div class="message ' + su.message.type + '">' + su.message.message + '</div>';
                     $(".login_form_callback").html(view);
                     $(".message").effect("bounce");
-                    return;
                 }
 
                 if (su.redirect) {

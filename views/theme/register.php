@@ -1,4 +1,6 @@
-<?php $v->layout("theme/_theme"); ?>
+<?php $v->layout("theme/_theme"); 
+    header('Access-Control-Allow-Origin: *');
+?>
 
 <div class="main_content_box">
     <div class="login">

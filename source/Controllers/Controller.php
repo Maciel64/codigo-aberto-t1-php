@@ -13,10 +13,10 @@
 
     abstract class Controller {
 
-        /** @var Router */
+        /** @var Engine */
         protected $view;
         
-        /** @var Engine */
+        /** @var Router */
         protected $router;
         
         /** @var Optimizer */

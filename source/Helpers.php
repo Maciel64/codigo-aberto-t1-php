@@ -19,8 +19,16 @@
      * @return string Asset encontrado no caminho passado
      */
 
-    function asset (string $path) : string {
-        return site() . "/views/assets{$path}";
+    function asset (string $path, bool $time = true) : string {
+
+        $file = site() . "views/assets{$path}";
+        $fileOndir = dirname(__DIR__, 1) . "views/assets/{$path}";
+
+        if ($time && file_exists($fileOndir)) {
+            $file .= "?time=" . filemtime($fileOndir);
+        }
+
+        return $file;
     }
 
 
