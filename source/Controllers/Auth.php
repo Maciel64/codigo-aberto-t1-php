@@ -11,12 +11,39 @@
         }
 
 
-        public function login($data): void {
-            echo json_encode($data);
+        public function login(array $data) : void {
+            $email = filter_var($data["email"], FILTER_VALIDATE_EMAIL);
+            $passwd = filter_var($data["passwd"], FILTER_DEFAULT);
+
+            if (!$email || !$passwd) {
+                echo $this->ajaxResponse("message", [
+                    "type" => "alert",
+                    "message" => "Informe seu email e senha para logar-se"
+                ]);
+                return;
+            }
+
+
+            $user = (new User)->find("email = :e", "e={$email}")->fetch();
+            if (!$user || !password_verify($passwd, $user->passwd)) {
+                echo $this->ajaxResponse("message", [
+                    "type" => "success",
+                    "message" => "Email ou senha inválidos"
+                ]);
+                return; 
+            }
+
+
+            $_SESSION["user"] = $user->id;
+
+
+            echo $this->ajaxResponse("redirect", [
+                "url" => $this->router->route("app.home")
+            ]);
         }
 
 
-        public function register($data): void {
+        public function register($data) : void {
             $data = filter_var_array($data, FILTER_SANITIZE_STRIPPED);
 
             if (in_array("", $data)) {
@@ -28,33 +55,25 @@
                 return;
             }
 
-            if (!filter_var($data["email"], FILTER_VALIDATE_EMAIL)) {
-                echo $this->ajaxResponse("message", [
-                    "type" => "error",
-                    "message" => "Por favor, informe um email válido"
-                ]);
-
-                return;
-            }
-
-            $userEmailExists = (new User)->find("email = :e", "e={$data["email"]}")->count();
-
-            if ($userEmailExists) {
-                echo $this->ajaxResponse("message", [
-                    "type" => "error",
-                    "message" => "Email passado já está cadastrado"
-                ]);
-
-                return;
-            }
 
             $user = new User();
             $user->first_name = $data["first_name"];
             $user->last_name = $data["last_name"];
             $user->email = $data["email"];
-            $user->passwd = password_hash($data["passwd"], PASSWORD_DEFAULT);
+            $user->passwd = $data["passwd"];
 
-            $user->save();
+            
+            if (!$user->save()) {
+                
+                echo $this->ajaxResponse("message", [
+                    "type" => "error",
+                    "message" => $user->fail()->getMessage()
+                ]);
+
+                return;
+            }
+
+
             $_SESSION["user"] = $user->id;
 
             echo $this->ajaxResponse("redirect", [
